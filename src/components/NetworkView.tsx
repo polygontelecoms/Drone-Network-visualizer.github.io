@@ -55,6 +55,8 @@ export const NetworkView = ({
   const [isCreateEdgeDialogOpen, setIsCreateEdgeDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
 
+  console.log('NetworkView rendering with filtered nodes:', filteredNodes.length);
+
   const handleNodeClick: NodeMouseHandler<CustomNode> = (_, node) => {
     setSelectedNode(node);
   };
@@ -77,7 +79,7 @@ export const NetworkView = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col h-full">
       <div className="border-b px-4 md:px-6 py-3 flex justify-between items-center">
         <h2 className="text-lg font-medium">Network Visualization</h2>
         <NetworkFilter 
@@ -86,8 +88,8 @@ export const NetworkView = ({
         />
       </div>
 
-      <div className="flex-1 flex flex-col lg:flex-row">
-        <div className="lg:hidden">
+      <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+        <div className="lg:hidden border-b">
           <NetworkSidebar 
             onAddNode={onAddNode}
             onCreateEdge={() => setIsCreateEdgeDialogOpen(true)}
@@ -98,27 +100,29 @@ export const NetworkView = ({
           />
         </div>
         
-        <div className="flex-1 p-4 md:p-6">
-          <Card className="h-full">
-            <ReactFlowProvider>
-              <NetworkGraph 
-                nodes={filteredNodes}
-                edges={edges}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
-                onNodeClick={handleNodeClick}
-              />
-            </ReactFlowProvider>
+        <div className="flex-1 p-2 md:p-4 lg:p-6 min-h-0">
+          <Card className="h-full min-h-[400px] lg:min-h-[600px]">
+            <div className="w-full h-full p-2">
+              <ReactFlowProvider>
+                <NetworkGraph 
+                  nodes={filteredNodes}
+                  edges={edges}
+                  onEdgesChange={onEdgesChange}
+                  onConnect={onConnect}
+                  onNodeClick={handleNodeClick}
+                />
+              </ReactFlowProvider>
+            </div>
           </Card>
         </div>
 
-        <div className="border-t lg:border-t-0 lg:border-l w-full lg:w-80 p-4 overflow-y-auto">
+        <div className="border-t lg:border-t-0 lg:border-l w-full lg:w-80 p-4 overflow-y-auto max-h-[400px] lg:max-h-none">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="w-full mb-4">
-              <TabsTrigger value="overview" className="flex-1">Overview</TabsTrigger>
-              <TabsTrigger value="tools" className="flex-1">Tools</TabsTrigger>
+              <TabsTrigger value="overview" className="flex-1 text-xs">Overview</TabsTrigger>
+              <TabsTrigger value="tools" className="flex-1 text-xs">Tools</TabsTrigger>
               {selectedNode && (
-                <TabsTrigger value="details" className="flex-1">Details</TabsTrigger>
+                <TabsTrigger value="details" className="flex-1 text-xs">Details</TabsTrigger>
               )}
             </TabsList>
             

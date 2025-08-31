@@ -212,25 +212,29 @@ const Index = () => {
   }, []);
 
   return (
-    <MainLayout>
-      <NetworkView
-        nodes={nodes}
-        edges={filteredEdges}
-        filteredNodes={filteredNodes}
-        selectedCommunities={selectedCommunities}
-        searchQuery={searchQuery}
-        onSearchChange={handleSearchChange}
-        onFilterChange={handleFilterChange}
-        onEdgesChange={handleEdgesChange}
-        onConnect={handleConnect}
-        onAddNode={handleAddNode}
-        onUpdateNode={handleUpdateNode}
-        onDeleteNode={handleDeleteNode}
-        onCreateEdge={handleCreateEdge}
-        onApplyLayout={handleApplyLayout}
-        onLoadNetwork={handleLoadNetwork}
-      />
-    </MainLayout>
+    <div className="h-screen flex flex-col">
+      <MainLayout>
+        <div className="flex-1 min-h-0">
+          <NetworkView
+            nodes={nodes}
+            edges={filteredEdges}
+            filteredNodes={filteredNodes}
+            selectedCommunities={selectedCommunities}
+            searchQuery={searchQuery}
+            onSearchChange={handleSearchChange}
+            onFilterChange={handleFilterChange}
+            onEdgesChange={handleEdgesChange}
+            onConnect={handleConnect}
+            onAddNode={handleAddNode}
+            onUpdateNode={handleUpdateNode}
+            onDeleteNode={handleDeleteNode}
+            onCreateEdge={handleCreateEdge}
+            onApplyLayout={handleApplyLayout}
+            onLoadNetwork={handleLoadNetwork}
+          />
+        </div>
+      </MainLayout>
+    </div>
   );
 };
 
