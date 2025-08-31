@@ -6,6 +6,11 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/Drone-Network-visualizer.github.io/' : '/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: mode === 'development',
+  },
   server: {
     host: "::",
     port: 8080,
